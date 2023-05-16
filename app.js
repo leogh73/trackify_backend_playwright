@@ -51,10 +51,10 @@ app.post('/clicoh', async (req, res) => {
 			])
 		)[0].json();
 		await browser.close();
-		res.status(200).json(data);
+		res.status(200).send(data);
 	} catch (error) {
 		console.log(error);
-		res.status(500).json({ error: error.toString() });
+		res.status(500).send({ error: error.toString() });
 	}
 });
 
@@ -94,10 +94,10 @@ app.post('/renaper', async (req, res) => {
 		};
 		let data = await Promise.race([fetchData(), timeout()]);
 		await browser.close();
-		res.status(200).json(data);
+		res.status(200).send(data);
 	} catch (error) {
 		console.log(error);
-		res.status(500).json({ error: error.toString() });
+		res.status(500).send({ error: error.toString() });
 	}
 });
 
