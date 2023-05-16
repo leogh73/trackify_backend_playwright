@@ -82,7 +82,9 @@ app.post('/renaper', async (req, res) => {
 			let response = await (
 				await Promise.all([
 					page.waitForResponse(
-						(res) => res.url() === `${decryptedData.RENAPER_API_URL2}` && res.status() === 200,
+						(res) =>
+							res.url() === `${decryptedData.RENAPER_API_URL2}` &&
+							response.request().method() !== 'OPTIONS',
 					),
 					page.click('#btn-consultar'),
 				])
