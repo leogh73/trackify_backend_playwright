@@ -85,8 +85,9 @@ app.post('/renaper', async (req, res) => {
 			await page.type('#tramite', `${code}`);
 			let response = await (
 				await Promise.all([
-					page.waitForResponse((res) => res.url() === `${decryptedData.RENAPER_API_URL2}`) &&
-						res.request().method() !== 'OPTIONS',
+					page.waitForResponse(
+						(res) => res.url() === `${decryptedData.RENAPER_API_URL2}` && res.status() === 200,
+					),
 					page.click('#btn-consultar'),
 				])
 			)[0].json();
