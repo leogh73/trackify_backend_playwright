@@ -28,6 +28,10 @@ let decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
 
 import playwright from 'playwright-aws-lambda';
 
+app.get('/', (req, res) => {
+	res.json({ message: 'activated' });
+});
+
 app.post('/clicoh', async (req, res) => {
 	const { code } = req.body;
 
