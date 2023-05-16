@@ -36,7 +36,7 @@ app.post('/clicoh', async (req, res) => {
 	const { code } = req.body;
 
 	try {
-		const browser = await playwright.launchChromium();
+		const browser = await playwright.launchChromium({ headless: true });
 		const context = await browser.newContext();
 		const page = await context.newPage();
 
@@ -66,7 +66,7 @@ app.post('/renaper', async (req, res) => {
 	const { code } = req.body;
 
 	try {
-		const browser = await playwright.launchChromium();
+		const browser = await playwright.launchChromium({ headless: true });
 		const context = await browser.newContext();
 		const page = await context.newPage();
 
