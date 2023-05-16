@@ -70,12 +70,12 @@ app.post('/renaper', async (req, res) => {
 			waitUntil: 'load',
 		});
 
-		const timeout = () =>
-			new Promise((resolve, reject) => {
-				setTimeout(() => {
-					reject('FUNCTION TIMEOUT');
-				}, 9000);
-			});
+		// const timeout = () =>
+		// 	new Promise((resolve, reject) => {
+		// 		setTimeout(() => {
+		// 			reject('FUNCTION TIMEOUT');
+		// 		}, 9000);
+		// 	});
 
 		const fetchData = async () => {
 			await page.type('#tramite', `${code}`);
