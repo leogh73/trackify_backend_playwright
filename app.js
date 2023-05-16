@@ -110,5 +110,5 @@ const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 import serverless from 'serverless-http';
-app.use('/netlify/functions/api', express.Router());
+app.use('/.netlify/functions/api', express.Router());
 module.exports.handler = serverless(app);
