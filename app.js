@@ -98,7 +98,7 @@ app.post('/renaper', async (req, res) => {
 		};
 		// let data = await Promise.race([fetchData(), timeout()]);
 		let data = await fetchData();
-		// await browser.close();
+		await browser.close();
 		res.status(200).json(data);
 	} catch (error) {
 		console.log(error);
