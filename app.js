@@ -82,7 +82,7 @@ app.post('/renaper', async (req, res) => {
 		// 	});
 
 		const fetchData = async () => {
-			await page.type('#tramite', `${code}`);
+			await page.type('#tramite', `${code.padStart(11, 0)}`);
 			let response = await (
 				await Promise.all([
 					page.waitForResponse(
@@ -98,7 +98,7 @@ app.post('/renaper', async (req, res) => {
 		};
 		// let data = await Promise.race([fetchData(), timeout()]);
 		let data = await fetchData();
-		await browser.close();
+		// await browser.close();
 		res.status(200).json(data);
 	} catch (error) {
 		console.log(error);
