@@ -66,7 +66,7 @@ app.post('/renaper', async (req, res) => {
 	const { code } = req.body;
 
 	try {
-		const browser = await playwright.launchChromium({ headless: false });
+		const browser = await playwright.launchChromium();
 		const context = await browser.newContext();
 		const page = await context.newPage();
 
