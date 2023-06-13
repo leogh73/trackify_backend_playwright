@@ -7,7 +7,7 @@
 	"main": "./app.js",
 	"typings": "dist/index",
 	"scripts": {
-		"start": "nodemon app.js",
+		"start": "node app.js",
 		"start-server": "nodemon app.js",
 		"start:dev": "nodemon app.js",
 		"test": "echo \"Error: no test specified\" && exit 1"
@@ -23,7 +23,6 @@
 		"helmet": "^7.0.0",
 		"nodemon": "^2.0.22",
 		"playwright-aws-lambda": "^0.10.0",
-		"playwright-core": "^1.33.0",
-		"serverless-http": "^3.2.0"
+		"playwright-core": "^1.33.0"
 	}
 }
