@@ -74,8 +74,9 @@ app.post('/renaper', async (req, res) => {
 			headless: chromium.headless,
 			ignoreHTTPSErrors: true,
 			defaultViewport: chromium.defaultViewport,
-			args: [...chromium.args, '--hide-scrollbars', '--disable-web-security'],
+			args: ['--hide-scrollbars', '--disable-web-security'],
 		});
+
 		const page = await browser.newPage();
 
 		await page.goto(`${decryptedData.RENAPER_API_URL1}`, {
