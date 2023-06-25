@@ -26,7 +26,8 @@ let bytes = CryptoJS.AES.decrypt(
 );
 let decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
 
-import playwright from 'playwright-core';
+import playwrightCore from 'playwright-core';
+import playwrightAWS from 'playwright-aws-lambda';
 import chromium from 'chrome-aws-lambda';
 
 app.get('/', (req, res) => {
@@ -37,7 +38,7 @@ app.post('/clicoh', async (req, res) => {
 	const { code } = req.body;
 
 	try {
-		const browser = await playwright.launchChromium({ headless: false });
+		const browser = await playwrightAWS.launchChromium({ headless: false });
 		const context = await browser.newContext();
 		const page = await context.newPage();
 
@@ -71,7 +72,7 @@ app.post('/renaper', async (req, res) => {
 		// const context = await browser.newContext();
 		// const page = await context.newPage();
 
-		const browser = await playwright.chromium.launch({
+		const browser = await playwrightCore.chromium.launch({
 			args: chromium.args,
 			executablePath: await chromium.executablePath,
 			headless: chromium.headless,
