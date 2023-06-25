@@ -27,6 +27,7 @@ let bytes = CryptoJS.AES.decrypt(
 let decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
 
 import playwright from 'playwright-aws-lambda';
+import chromium from 'chrome-aws-lambda';
 
 app.get('/', (req, res) => {
 	res.json({ message: 'activated' });
@@ -66,9 +67,18 @@ app.post('/renaper', async (req, res) => {
 	const { code } = req.body;
 
 	try {
-		const browser = await playwright.launchChromium({ headless: false });
-		const context = await browser.newContext();
-		const page = await context.newPage();
+		// const browser = await playwright.launchChromium({ headless: false });
+		// const context = await browser.newContext();
+		// const page = await context.newPage();
+
+		const browser = chromium.puppeteer.launch({
+			args: chromium.args,
+			defaultViewport: chromium.defaultViewport,
+			executablePath: await chromium.executablePath,
+			headless: chromium.headless,
+			ignoreHTTPSErrors: true,
+		});
+		const page = await browser.newPage();
 
 		await page.goto(`${decryptedData.RENAPER_API_URL1}`, {
 			waitUntil: 'load',
