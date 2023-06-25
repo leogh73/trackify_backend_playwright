@@ -32,7 +32,10 @@ app.post('/clicoh', async (req, res) => {
 	const { code } = req.body;
 
 	try {
-		const browser = await puppeteer.launch({ headless: 'new' });
+		const browser = await puppeteer.launch({
+			headless: 'new',
+			args: ['--no-sandbox', '--disable-setuid-sandbox'],
+		});
 		const page = await browser.newPage();
 
 		await page.goto(`${decryptedData.CLICOH_API_URL1}`, {
@@ -65,7 +68,10 @@ app.post('/renaper', async (req, res) => {
 		// const context = await browser.newContext();
 		// const page = await context.newPage();
 
-		const browser = await puppeteer.launch({ headless: 'new' });
+		const browser = await puppeteer.launch({
+			headless: 'new',
+			args: ['--no-sandbox', '--disable-setuid-sandbox'],
+		});
 		const page = await browser.newPage();
 
 		await page.goto(`${decryptedData.RENAPER_API_URL1}`, {
