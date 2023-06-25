@@ -3,7 +3,9 @@ const app = express();
 import cors from 'cors';
 import helmet from 'helmet';
 import compression from 'compression';
+import locateChrome from 'locate-chrome';
 import puppeteer from 'puppeteer';
+
 import playwright from 'playwright-aws-lambda';
 import dotenv from 'dotenv/config';
 
@@ -69,8 +71,10 @@ app.post('/renaper', async (req, res) => {
 		// const context = await browser.newContext();
 		// const page = await context.newPage();
 
+		const executablePath = await new Promise((resolve) => locateChrome((arg) => resolve(arg)));
+
 		const browser = await puppeteer.launch({
-			executablePath: chromium.executablePath(),
+			executablePath,
 			headless: chromium.headless,
 			ignoreHTTPSErrors: true,
 			defaultViewport: chromium.defaultViewport,
