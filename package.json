@@ -7,16 +7,14 @@
 	"main": "./app.js",
 	"typings": "dist/index",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "nodemon app.js",
+		"start": "node app.js",
 		"start-server": "nodemon app.js",
 		"start:dev": "nodemon app.js",
-		"postinstall": "npx playwright install"
+		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"author": "LEO",
 	"license": "ISC",
 	"dependencies": {
-		"chrome-aws-lambda": "^10.1.0",
 		"compression": "^1.7.4",
 		"cors": "^2.8.5",
 		"crypto-js": "^4.1.1",
@@ -25,6 +23,6 @@
 		"helmet": "^7.0.0",
 		"nodemon": "^2.0.22",
 		"playwright-aws-lambda": "^0.10.0",
-		"playwright-core": "1.35.1"
+		"playwright-core": "^1.33.0"
 	}
 }
