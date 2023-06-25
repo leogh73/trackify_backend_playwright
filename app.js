@@ -26,7 +26,7 @@ let bytes = CryptoJS.AES.decrypt(
 );
 let decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
 
-import playwright from 'playwright-aws-lambda';
+import playwright from 'playwright-core';
 import chromium from 'chrome-aws-lambda';
 
 app.get('/', (req, res) => {
@@ -71,12 +71,10 @@ app.post('/renaper', async (req, res) => {
 		// const context = await browser.newContext();
 		// const page = await context.newPage();
 
-		const browser = await chromium.puppeteer.launch({
+		const browser = await playwright.chromium.launch({
 			args: chromium.args,
-			defaultViewport: chromium.defaultViewport,
 			executablePath: await chromium.executablePath,
 			headless: chromium.headless,
-			ignoreHTTPSErrors: true,
 		});
 		const page = await browser.newPage();
 
