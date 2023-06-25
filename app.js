@@ -15,6 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(helmet());
 
 import CryptoJS from 'crypto-js';
+import { chromium } from 'playwright-core';
 // let vars = {};
 // let encrypted = CryptoJS.AES.encrypt(
 // 	JSON.stringify(vars),
@@ -69,8 +70,11 @@ app.post('/renaper', async (req, res) => {
 		// const page = await context.newPage();
 
 		const browser = await puppeteer.launch({
-			headless: 'new',
-			args: ['--no-sandbox', '--disable-setuid-sandbox'],
+			executablePath: chromium.executablePath(),
+			headless: chromium.headless,
+			ignoreHTTPSErrors: true,
+			defaultViewport: chromium.defaultViewport,
+			args: [...chromium.args, '--hide-scrollbars', '--disable-web-security'],
 		});
 		const page = await browser.newPage();
 
