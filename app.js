@@ -3,10 +3,6 @@ const app = express();
 import cors from 'cors';
 import helmet from 'helmet';
 import compression from 'compression';
-import locateChrome from 'locate-chrome';
-import puppeteer from 'puppeteer';
-
-import playwright from 'playwright-aws-lambda';
 import dotenv from 'dotenv/config';
 
 app.use(compression());
@@ -17,7 +13,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(helmet());
 
 import CryptoJS from 'crypto-js';
-import { chromium } from 'playwright-core';
 // let vars = {};
 // let encrypted = CryptoJS.AES.encrypt(
 // 	JSON.stringify(vars),
@@ -31,15 +26,19 @@ let bytes = CryptoJS.AES.decrypt(
 );
 let decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
 
+import playwright from 'playwright-aws-lambda';
+
+app.get('/', (req, res) => {
+	res.json({ message: 'activated' });
+});
+
 app.post('/clicoh', async (req, res) => {
 	const { code } = req.body;
 
 	try {
-		const browser = await puppeteer.launch({
-			headless: 'new',
-			args: ['--no-sandbox', '--disable-setuid-sandbox'],
-		});
-		const page = await browser.newPage();
+		const browser = await playwright.launchChromium({ headless: false });
+		const context = await browser.newContext();
+		const page = await context.newPage();
 
 		await page.goto(`${decryptedData.CLICOH_API_URL1}`, {
 			waitUntil: 'load',
@@ -67,32 +66,20 @@ app.post('/renaper', async (req, res) => {
 	const { code } = req.body;
 
 	try {
-		// const browser = await playwright.launchChromium({ headless: false });
-		// const context = await browser.newContext();
-		// const page = await context.newPage();
-
-		const executablePath = await new Promise((resolve) => locateChrome((arg) => resolve(arg)));
-
-		const browser = await puppeteer.launch({
-			executablePath,
-			headless: chromium.headless,
-			ignoreHTTPSErrors: true,
-			defaultViewport: chromium.defaultViewport,
-			args: ['--hide-scrollbars', '--disable-web-security'],
-		});
-
-		const page = await browser.newPage();
+		const browser = await playwright.launchChromium({ headless: false });
+		const context = await browser.newContext();
+		const page = await context.newPage();
 
 		await page.goto(`${decryptedData.RENAPER_API_URL1}`, {
 			waitUntil: 'load',
 		});
 
-		const timeout = () =>
-			new Promise((resolve, reject) => {
-				setTimeout(() => {
-					reject('FUNCTION TIMEOUT');
-				}, 20000);
-			});
+		// const timeout = () =>
+		// 	new Promise((resolve, reject) => {
+		// 		setTimeout(() => {
+		// 			reject('FUNCTION TIMEOUT');
+		// 		}, 9000);
+		// 	});
 
 		const fetchData = async () => {
 			await page.type('#tramite', `${code}`);
@@ -109,8 +96,8 @@ app.post('/renaper', async (req, res) => {
 				return await fetchData();
 			} else return response;
 		};
-		let data = await Promise.race([fetchData(), timeout()]);
-		// let data = await fetchData();
+		// let data = await Promise.race([fetchData(), timeout()]);
+		let data = await fetchData();
 		await browser.close();
 		res.status(200).json(data);
 	} catch (error) {

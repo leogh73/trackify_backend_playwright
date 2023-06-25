@@ -8,7 +8,7 @@
 	"typings": "dist/index",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "node app.js",
+		"start": "nodemon app.js",
 		"start-server": "nodemon app.js",
 		"start:dev": "nodemon app.js"
 	},
@@ -21,11 +21,8 @@
 		"dotenv": "^16.0.3",
 		"express": "^4.18.2",
 		"helmet": "^7.0.0",
-		"locate-chrome": "^0.1.1",
 		"nodemon": "^2.0.22",
 		"playwright-aws-lambda": "^0.10.0",
-		"playwright-core": "^1.33.0",
-		"puppeteer": "^19.6.3",
-		"puppeteer-core": "^19.6.3"
+		"playwright-core": "^1.33.0"
 	}
 }
