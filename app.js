@@ -71,7 +71,7 @@ app.post('/renaper', async (req, res) => {
 		// const context = await browser.newContext();
 		// const page = await context.newPage();
 
-		const browser = chromium.puppeteer.launch({
+		const browser = await chromium.puppeteer.launch({
 			args: chromium.args,
 			defaultViewport: chromium.defaultViewport,
 			executablePath: await chromium.executablePath,
