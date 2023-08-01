@@ -12,7 +12,7 @@ app.use(cors({ origin: true }));
 app.use(express.urlencoded({ extended: false }));
 app.use(helmet());
 
-import clicoh from './src/services/clicoh';
+import clicoh from './src/services/clicoh.js';
 import enviopack from './src/services/enviopack.js';
 import renaper from './src/services/renaper.js';
 

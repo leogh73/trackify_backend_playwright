@@ -1,5 +1,5 @@
 import playwright from 'playwright-aws-lambda';
-import vars from '../src/modules/crypto-js.js';
+import vars from '../modules/crypto-js.js';
 
 const check = async (req, res) => {
 	const { code } = req.body;
