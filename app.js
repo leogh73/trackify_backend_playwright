@@ -4,21 +4,17 @@ import cors from 'cors';
 import helmet from 'helmet';
 import compression from 'compression';
 import dotenv from 'dotenv/config';
+import checkHandler from './src/services/_services.js';
 
-app.use(compression());
 app.setMaxListeners(20);
 app.use(express.json());
-app.use(cors({ origin: true }));
 app.use(express.urlencoded({ extended: false }));
+app.use(cors({ origin: true }));
 app.use(helmet());
+app.use(compression());
 
-import clicoh from './src/services/clicoh.js';
-import enviopack from './src/services/enviopack.js';
-import renaper from './src/services/renaper.js';
-
-app.post('/clicoh', clicoh);
-app.post('/enviopack', enviopack);
-app.post('/renaper', renaper);
+app.get('/awake', (req, res) => res.sendStatus(204));
+app.post('/api', checkHandler);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Listening on port ${port}`));
