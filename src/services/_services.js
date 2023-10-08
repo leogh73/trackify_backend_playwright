@@ -33,7 +33,7 @@ const checkHandler = async (req, res) => {
 			setTimeout(async () => {
 				reject('Service timeout');
 				await closeBrowser();
-			}, 7000);
+			}, 8000);
 		});
 
 	try {
