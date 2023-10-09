@@ -13,7 +13,13 @@ app.use(cors({ origin: true }));
 app.use(helmet());
 app.use(compression());
 
-app.get('/awake', (req, res) => res.sendStatus(204));
+import playwright from 'playwright-aws-lambda';
+
+app.get('/awake', async (req, res) => {
+	let browser = await playwright.launchChromium({ headless: false });
+	await browser.close();
+	res.sendStatus(204);
+});
 app.post('/api', checkHandler);
 
 const port = process.env.PORT || 5000;
