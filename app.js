@@ -18,7 +18,7 @@ import playwright from 'playwright-aws-lambda';
 app.get('/awake', async (req, res) => {
 	let browser = await playwright.launchChromium({ headless: false });
 	await browser.close();
-	res.sendStatus(204);
+	res.status(204);
 });
 app.post('/api', checkHandler);
 
