@@ -32,10 +32,10 @@ const checkHandler = async (req, res) => {
 	try {
 		let data = await Promise.race([list[service].check(page, code), timeout()]);
 		await context.close();
-		return res.status(200).json(data);
+		res.status(200).json(data);
 	} catch (error) {
 		console.log(error);
-		res.status(500).json(error.toString());
+		res.status(500).json({ error: error.toString() });
 	}
 };
 

@@ -16,9 +16,14 @@ app.use(compression());
 import playwright from 'playwright-aws-lambda';
 
 app.get('/awake', async (req, res) => {
-	let browser = await playwright.launchChromium({ headless: false });
-	await browser.close();
-	res.status(204);
+	try {
+		let browser = await playwright.launchChromium({ headless: false });
+		await browser.close();
+		res.status(200).json({ success: 'API awaken' });
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({ error: error.toString() });
+	}
 });
 app.post('/api', checkHandler);
 
