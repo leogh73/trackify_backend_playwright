@@ -5,6 +5,7 @@ import enviopack from './enviopack.js';
 import pickit from './pickit.js';
 import renaper from './renaper.js';
 import transoftWeb from './transoftWeb.js';
+import viaCargo from './via_cargo.js';
 
 const list = {
 	ClicOh: clicOh,
@@ -12,6 +13,7 @@ const list = {
 	pickit: pickit,
 	Renaper: renaper,
 	'Transoft Web': transoftWeb,
+	'Via Cargo': viaCargo,
 };
 
 const checkHandler = async (req, res) => {
