@@ -10,7 +10,7 @@ const check = async (page, code) => {
 		let response = await (
 			await Promise.all([
 				page.waitForResponse((res) => res.url() === `${vars.RENAPER_API_URL}busqueda.php`),
-				page.click('#btn-consultar'),
+				page.click('#form-miargentina > div > div:nth-child(2) > div > button'),
 			])
 		)[0].json();
 		if (response.errors?.tipo === 'ERROR') {

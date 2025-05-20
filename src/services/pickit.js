@@ -4,7 +4,10 @@ const check = async (page, code) => {
 	await page.goto(`${vars.PICKIT_API_URL1}`, {
 		waitUntil: 'load',
 	});
-	await page.type('div.GTxDnauLa0tOXlHn_PJoS > input', `${code}`);
+	await page.type(
+		'#app > div._home_1thne_16 > form > div._input-container_1thne_1 > input',
+		`${code}`,
+	);
 
 	return await (
 		await Promise.all([
