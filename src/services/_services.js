@@ -21,10 +21,9 @@ const checkHandler = async (req, res) => {
 
 	const browser = await playwright.launchChromium({ headless: false });
 	const context = await browser.newContext({ ignoreHTTPSErrors: true });
-	const page = await context.newPage();
 
 	try {
-		let data = await list[service].check(page, code);
+		let data = await list[service].check(context, code);
 		res.status(200).json(data);
 	} catch (error) {
 		res.status(500).json({ error: error.toString() });
