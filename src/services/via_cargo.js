@@ -1,7 +1,6 @@
 import vars from '../modules/crypto-js.js';
 
-const check = async (context, code) => {
-	const page = await context.newPage();
+const check = async (page, code) => {
 	await page.goto(vars.VIA_CARGO_API_URL1, {
 		waitUntil: 'load',
 	});
