@@ -23,21 +23,13 @@ const checkHandler = async (req, res) => {
 	const context = await browser.newContext({ ignoreHTTPSErrors: true });
 	const page = await context.newPage();
 
-	const timeout = () =>
-		new Promise((resolve, reject) => {
-			setTimeout(async () => {
-				reject('Service timeout');
-				await context.close();
-			}, 8000);
-		});
-
 	try {
-		let data = await Promise.race([list[service].check(page, code), timeout()]);
-		await context.close();
+		let data = await list[service].check(page, code);
 		res.status(200).json(data);
 	} catch (error) {
 		res.status(500).json({ error: error.toString() });
 	}
+	await context.close();
 };
 
 export default checkHandler;
